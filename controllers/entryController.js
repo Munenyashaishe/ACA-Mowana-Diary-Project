@@ -3,23 +3,68 @@ const { StatusCodes } = require('http-status-codes');
 const { BadRequestError, NotFoundError } = require('../errors');
 
 const getAllEntries = async (req, res) => {
-  res.send('all jobs');
+  const entries = await Entry.find({ createdBy: req.user.userId }).sort(
+    'createdAt'
+  );
+  res.status(StatusCodes.OK).json({ entries, nbHits: entries.length });
 };
 
 const getEntry = async (req, res) => {
-  res.send('single job');
+  const {
+    user: { userId },
+    params: { id: entryId },
+  } = req;
+
+  const entry = await Entry.findOne({ _id: entryId, createdBy: userId });
+
+  if (!entry) {
+    throw new NotFoundError(`No entry with id ${entryId}`);
+  }
+
+  res.status(StatusCodes.OK).json({ entry });
 };
 
 const createEntry = async (req, res) => {
-  res.send('creating entry');
+  req.body.createdBy = req.user.userId;
+
+  const entry = await Entry.create(req.body);
+  res.status(StatusCodes.CREATED).json({ entry });
 };
 
 const editEntry = async (req, res) => {
-  res.send('editing entry');
+  const {
+    user: { userId },
+    params: { id: entryId },
+  } = req;
+
+  const entry = await Entry.findByIdAndUpdate(
+    { _id: entryId, createdBy: userId },
+    req.body,
+    { new: true, runValidators: true }
+  );
+
+  if (!entry) {
+    throw new NotFoundError(`No entry with id ${entryId}`);
+  }
+
+  res.status(StatusCodes.CREATED).json({ entry });
 };
 
 const deleteEntry = async (req, res) => {
-  res.send('deleting entry');
+  const {
+    user: { userId },
+    params: { id: entryId },
+  } = req;
+
+  const entry = await Entry.findOneAndRemove({
+    _id: entryId,
+    createdBy: userId,
+  });
+
+  if (!entry) {
+    throw new NotFoundError(`No entry with id ${entryId}`);
+  }
+  res.status(StatusCodes.OK).send();
 };
 
 const addToFavorites = async (req, res) => {
