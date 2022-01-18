@@ -3,10 +3,12 @@ const mongoose = require('mongoose');
 const app = express();
 require('dotenv').config();
 
-const port = process.env.PORT || 5000;
+const entriesRouter = require('./routes/entryRoutes');
 
 app.use(express.json());
+app.use('/api/v1/entries', entriesRouter);
 
+const port = process.env.PORT || 5000;
 const start = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
