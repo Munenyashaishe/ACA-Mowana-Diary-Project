@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 
 const EntrySchema = new mongoose.Schema(
   {
+    createdBy: {
+      type: mongoose.Types.ObjectId,
+      ref: 'User',
+      required: [true, 'Please provide a user'],
+    },
     title: {
       type: String,
       required: [true, 'Title Must Be Provided'],
