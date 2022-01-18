@@ -1,3 +1,5 @@
+// SCHEMA FOR HOW A USER DOCUMENT SHOULD BE STRUCTURED.
+
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -25,12 +27,14 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
+// METHOD THAT IS CALLED BEFORE THE DOCUMENT SAVES THAT HASHES THE PASSWORD
 UserSchema.pre('save', async function (next) {
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
   next();
 });
 
+// INSTANCE METHOD THAT CREATES THE JWT AND SIGNS IT
 UserSchema.methods.createJWT = function () {
   return jwt.sign(
     { userId: this._id, name: this.name },
@@ -41,6 +45,7 @@ UserSchema.methods.createJWT = function () {
   );
 };
 
+// INSTANCE METHOD TO COMPARE HASHED PASSWORD AND REGULAR PASSWORD
 UserSchema.methods.comparePassword = async function (candidatePassword) {
   const isMatch = await bcrypt.compare(candidatePassword, this.password);
   return isMatch;

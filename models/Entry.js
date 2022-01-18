@@ -1,3 +1,6 @@
+// HOW A DIARY ENTRY IS STRUCTURED
+// createdBy DEFINES THE USER THAT MADE THE ENTRY AND HENCE BELONGS TO THEM
+
 const mongoose = require('mongoose');
 
 const EntrySchema = new mongoose.Schema(

@@ -1,3 +1,10 @@
+/* CONTROLLERS FOR THE ENTRY ROUTES
+  CONTAINS NECESSARY CRUD (CREATE, READ, UPDATE AND DELETE OPERATIONS)
+  TO MANIPULATE DIARY ENTRIES.
+
+  I IMAGINE NAMES ARE FAIRLY DESCRIPTIVE AS TO THEIR PURPOSE
+*/
+
 const Entry = require('../models/Entry');
 const { StatusCodes } = require('http-status-codes');
 const { BadRequestError, NotFoundError } = require('../errors');
@@ -18,19 +25,23 @@ const getEntry = async (req, res) => {
   const entry = await Entry.findOne({ _id: entryId, createdBy: userId });
 
   if (!entry) {
-    throw new NotFoundError(`No entry with id ${entryId}`);
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ msg: `No entry with id ${entryId}` });
   }
 
   res.status(StatusCodes.OK).json({ entry });
 };
 
 const createEntry = async (req, res) => {
-  req.body.createdBy = req.user.userId;
+  req.body.createdBy = req.user.userId; // ASSIGNS THE POST TO THE USER WHO CREATED IT.
 
   const entry = await Entry.create(req.body);
   res.status(StatusCodes.CREATED).json({ entry });
 };
 
+// USES PATCH TO EDIT WHAT WAS CHANGED AND KEEP THE REST
+// EDITABLES INCLUDE THE TITLE, THE BODY, AND WHETHER OR NOT IT IS BOOKMARKED
 const editEntry = async (req, res) => {
   const {
     user: { userId },
@@ -44,7 +55,9 @@ const editEntry = async (req, res) => {
   );
 
   if (!entry) {
-    throw new NotFoundError(`No entry with id ${entryId}`);
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ msg: `No entry with id ${entryId}` });
   }
 
   res.status(StatusCodes.CREATED).json({ entry });
@@ -62,22 +75,14 @@ const deleteEntry = async (req, res) => {
   });
 
   if (!entry) {
-    throw new NotFoundError(`No entry with id ${entryId}`);
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ msg: `No entry with id ${entryId}` });
   }
   res.status(StatusCodes.OK).send();
 };
 
-const addToFavorites = async (req, res) => {
-  res.send('adding to favorites');
-};
-
-const getFavorites = async (req, res) => {
-  res.send('getting favorites');
-};
-
 module.exports = {
-  getFavorites,
-  addToFavorites,
   deleteEntry,
   editEntry,
   createEntry,
