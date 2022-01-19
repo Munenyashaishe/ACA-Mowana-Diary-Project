@@ -17,8 +17,6 @@ const showEntries = async () => {
       data: { nbHits, entries },
     } = await axios.get('/api/v1/entries', config);
 
-    console.log(typeof nbHits);
-
     if (nbHits < 1) {
       entriesDOM.innerHTML = `
         <h5>You've made no entries. Go on, add one.</h5>
@@ -35,9 +33,8 @@ const showEntries = async () => {
             <h4>${title}</h4>
             <p>${createdAt}</p>
             <p>Bookmarked: ${isFavorite}</p>
-            <button class='edit-btn'><i>Edit/Confirm</i></button>
-            <button class='delete-btn' data-id=${id}><i>Delete</i></button>
-            <a href='entry.html?id=${id}' class='bookmark-btn'>Edit</a>
+            <button class='delete-btn' data-id=${id}>Delete</button>
+            <button class='edit-btn' data-id=${id}>Edit</button>
           </header>
           <footer>
           
@@ -77,17 +74,27 @@ logoutBtn.addEventListener('click', () => {
   window.location.replace('/');
 });
 
-// entriesDOM.addEventListener('click', async (e) => {
-//   const element = e.target;
-//   if (element.parentElement.classList.contains('edit-btn')) {
-//     console.log(true);
-//   }
-// });
+entriesDOM.addEventListener('click', async (e) => {
+  const element = e.target;
+  console.log(element);
+  if (element.classList.contains('edit-btn')) {
+    console.log('edit btn clciked');
+    const id = element.dataset.id;
+    try {
+      const {
+        data: { entry },
+      } = await axios.get(`api/v1/entries/${id}`, config);
+      localStorage.setItem('entry_to_edit', JSON.stringify(entry));
+      window.location.replace(`/entry.html?id=${id}`);
+    } catch (error) {}
+  }
+});
 
 entriesDOM.addEventListener('click', async (e) => {
   const element = e.target;
-  if (element.parentElement.classList.contains('delete-btn')) {
-    const id = element.parentElement.dataset.id;
+  if (element.classList.contains('delete-btn')) {
+    console.log(element);
+    const id = element.dataset.id;
     try {
       await axios.delete(`/api/v1/entries/${id}`, config);
       showEntries();
@@ -105,6 +112,8 @@ createNewEntryForm.addEventListener('submit', async (e) => {
   try {
     e.preventDefault();
     await axios.post('/api/v1/entries', { title, body }, config);
+    titleInput.value = '';
+    bodyInput.value = '';
     showEntries();
   } catch (error) {
     console.log(error);
