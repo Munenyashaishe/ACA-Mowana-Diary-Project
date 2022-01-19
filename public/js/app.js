@@ -2,11 +2,12 @@ const welcomeText = document.querySelector('#welcome-text');
 const entriesDOM = document.querySelector('.entries');
 const logoutBtn = document.querySelector('#btnLogout');
 
+const config = {
+  headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+};
+
 const showEntries = async () => {
   'show entries running';
-  const config = {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-  };
 
   try {
     const {
@@ -32,7 +33,7 @@ const showEntries = async () => {
             <p>${createdAt}</p>
             <p>Bookmarked: ${isFavorite}</p>
             <button class='edit-btn'><i>Edit/Confirm</i></button>
-            <button class='delete-btn'><i>Delete</i></button>
+            <button class='delete-btn' data-id=${id}><i>Delete</i></button>
           </header>
           <footer>
           
@@ -74,5 +75,20 @@ logoutBtn.addEventListener('click', () => {
 
 entriesDOM.addEventListener('click', async (e) => {
   const element = e.target;
-  console.log(element);
+  if (element.parentElement.classList.contains('edit-btn')) {
+    console.log(true);
+  }
+});
+
+entriesDOM.addEventListener('click', async (e) => {
+  const element = e.target;
+  if (element.parentElement.classList.contains('delete-btn')) {
+    const id = element.parentElement.dataset.id;
+    try {
+      await axios.delete(`/api/v1/entries/${id}`, config);
+      showEntries();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 });
