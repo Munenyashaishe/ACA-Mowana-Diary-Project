@@ -1,6 +1,9 @@
 const welcomeText = document.querySelector('#welcome-text');
 const entriesDOM = document.querySelector('.entries');
 const logoutBtn = document.querySelector('#btnLogout');
+const createNewEntryForm = document.querySelector('#formCreate');
+const titleInput = document.querySelector('#title');
+const bodyInput = document.querySelector('#body');
 
 const config = {
   headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
@@ -34,6 +37,7 @@ const showEntries = async () => {
             <p>Bookmarked: ${isFavorite}</p>
             <button class='edit-btn'><i>Edit/Confirm</i></button>
             <button class='delete-btn' data-id=${id}><i>Delete</i></button>
+            <a href='entry.html?id=${id}' class='bookmark-btn'>Edit</a>
           </header>
           <footer>
           
@@ -73,12 +77,12 @@ logoutBtn.addEventListener('click', () => {
   window.location.replace('/');
 });
 
-entriesDOM.addEventListener('click', async (e) => {
-  const element = e.target;
-  if (element.parentElement.classList.contains('edit-btn')) {
-    console.log(true);
-  }
-});
+// entriesDOM.addEventListener('click', async (e) => {
+//   const element = e.target;
+//   if (element.parentElement.classList.contains('edit-btn')) {
+//     console.log(true);
+//   }
+// });
 
 entriesDOM.addEventListener('click', async (e) => {
   const element = e.target;
@@ -90,5 +94,19 @@ entriesDOM.addEventListener('click', async (e) => {
     } catch (error) {
       console.log(error);
     }
+  }
+});
+
+createNewEntryForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const title = titleInput.value;
+  const body = bodyInput.value;
+
+  try {
+    e.preventDefault();
+    await axios.post('/api/v1/entries', { title, body }, config);
+    showEntries();
+  } catch (error) {
+    console.log(error);
   }
 });

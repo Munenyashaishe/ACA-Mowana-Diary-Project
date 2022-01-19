@@ -11,6 +11,19 @@
       <p id="welcome-text">welcome to your diary</p>
       <button id="btnLogout">Logout</button>
     </header>
+
+    <section class="create-entry">
+      <form id="formCreate">
+        <input type="text" id="title" placeholder="title" />
+        <textarea
+          name="make-entry"
+          id="body"
+          placeholder="Write about your day"
+        ></textarea>
+        <button type="submit">Post</button>
+      </form>
+    </section>
+
     <section class="entries"></section>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
