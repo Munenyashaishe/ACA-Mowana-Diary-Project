@@ -3,6 +3,7 @@ const email = document.querySelector('#inputEmail');
 const password = document.querySelector('#inputPassword');
 const loginBtn = document.querySelector('#btnLogin');
 
+// FACILITATES LOGGING A USER IN
 loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -17,12 +18,13 @@ loginForm.addEventListener('submit', async (e) => {
     const { user, token } = data;
     console.log(user, token);
 
+    // PLACES USER AND THEIR TOKEN IN LOCAL STORAGE
     if (user) {
       localStorage.setItem('diary_user', user.name);
       localStorage.setItem('token', token);
       window.location.replace('/dashboard.html');
     } else {
-      alert('Credentials must be wrong');
+      alert('Credentials must be wrong'); // TODO: GOING TO CHANGE THIS TO SOMETHING MORE REASONABLE
     }
   } catch (error) {
     console.error(error);
