@@ -10,8 +10,7 @@ const config = {
 };
 
 const showEntries = async () => {
-  'show entries running';
-
+  // GETS DATA FROM BACKEND
   try {
     const {
       data: { nbHits, entries },
@@ -23,6 +22,7 @@ const showEntries = async () => {
       `;
     }
 
+    // CREATES INDIVIDUAL ENTRIES FROM THE BACKEND DATA
     const allEntries = entries
       .map((entry) => {
         const { createdAt, isFavorite, title, _id: id, body } = entry;
@@ -47,13 +47,14 @@ const showEntries = async () => {
       .join('');
     entriesDOM.innerHTML = allEntries;
   } catch (error) {
-    console.log(error);
+    // IF FETCH WAS UNSUCCESSFUL, SHOW AN ERROR
     entriesDOM.innerHTML = `
     '<h5>There was an error, please try later....</h5>';
     `;
   }
 };
 
+// CHECKS TO SEE IF TOKEN IS VALID AND USER EXISTS BEFORE LOADING THEIR ENTRIES
 window.onload = function () {
   const user = localStorage.getItem('diary_user');
   const token = localStorage.getItem('token');
@@ -68,28 +69,32 @@ window.onload = function () {
   showEntries();
 };
 
+// LOGS USER OUT, REMOVES THEIR TOKEN FROM LOCAL STORAGE AND REROUTES BACK TO index.html
 logoutBtn.addEventListener('click', () => {
   localStorage.removeItem('token');
   localStorage.removeItem('diary_user');
   window.location.replace('/');
 });
 
+// FOR EDITING AN ENTRY, CLICKING THE BUTTON REROUTES TO entry.html AND ALLOWS US TO EDIT IT FROM THERE
 entriesDOM.addEventListener('click', async (e) => {
   const element = e.target;
   console.log(element);
   if (element.classList.contains('edit-btn')) {
-    console.log('edit btn clciked');
-    const id = element.dataset.id;
+    const id = element.dataset.id; // ATTACHED DURING THE MAPPING (IS THE ID OF THE ENTRY)
     try {
       const {
         data: { entry },
       } = await axios.get(`api/v1/entries/${id}`, config);
+
+      // PLACES THE ENTRY IN LOCAL STORAGE SO THAT WE CAN GRAB IT FROM entry.html
       localStorage.setItem('entry_to_edit', JSON.stringify(entry));
       window.location.replace(`/entry.html?id=${id}`);
     } catch (error) {}
   }
 });
 
+// DELETE AN ENTRY FROM THE MAIN LIST
 entriesDOM.addEventListener('click', async (e) => {
   const element = e.target;
   if (element.classList.contains('delete-btn')) {
@@ -104,6 +109,7 @@ entriesDOM.addEventListener('click', async (e) => {
   }
 });
 
+// POSTING A NEW ENTRY
 createNewEntryForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const title = titleInput.value;
