@@ -2,21 +2,17 @@ const express = require('express');
 const router = express.Router();
 
 const {
-  addToFavorites,
   createEntry,
   deleteEntry,
   editEntry,
   getAllEntries,
   getEntry,
-  getFavorites,
 } = require('../controllers/entryController');
 
+// localhost:5000/api/v1/entries
 router.route('/').post(createEntry).get(getAllEntries);
-router
-  .route('/:id')
-  .get(getEntry)
-  .delete(deleteEntry)
-  .patch(editEntry)
-  .patch(addToFavorites);
+
+// localhost:5000/api/v1/entries/:id
+router.route('/:id').get(getEntry).delete(deleteEntry).patch(editEntry);
 
 module.exports = router;
