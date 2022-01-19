@@ -1,0 +1,85 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 2rem;
+}
+
+.create-entry {
+  width: 80%;
+  margin: 5rem auto;
+
+  /* background-color: blue; */
+}
+
+#formCreate {
+  margin: 1rem 0;
+}
+
+.create-entry-input {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+  width: 70%;
+  margin-bottom: 0.75rem;
+}
+
+textarea {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-family: inherit;
+}
+
+.submit-btn {
+  float: right;
+}
+
+@media (min-width: 768px) {
+  h2 {
+    font-size: 40px;
+  }
+  .submit-btn {
+    width: 150px;
+    height: 50px;
+    font-size: 1.3rem;
+  }
+}
+
+.entries {
+  width: 80%;
+  margin: 2rem auto;
+}
+
+.text-wrapper {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.entry {
+  padding: 0 1rem;
+  border: 1px solid var(--clr-secondary);
+  border-radius: var(--radius-sm);
+  margin-bottom: 1rem;
+}
+
+.entry header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.entry footer p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.btn.edit-btn {
+  background-color: #0275d8;
+}
+
+.btn.delete-btn {
+  background-color: #df4759;
+}

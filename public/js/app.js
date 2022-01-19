@@ -28,17 +28,23 @@ const showEntries = async () => {
         const { createdAt, isFavorite, title, _id: id, body } = entry;
 
         return `
-        <article>
+        <article class='entry'>
           <header>
-            <h4>${title}</h4>
-            <p>${createdAt}</p>
-            <p>Bookmarked: ${isFavorite}</p>
-            <button class='delete-btn' data-id=${id}>Delete</button>
-            <button class='edit-btn' data-id=${id}>Edit</button>
-          </header>
-          <footer>
-          
+            <div>
+              <h4>${title}</h4>
+              <label for="favorite">Bookmarked</label>
+              <input type="checkbox" name="favorite" ${
+                isFavorite ? 'checked' : ''
+              } />
+              </div>
+            <div> 
+              <p>Date: ${createdAt}</p>
+            </div>
+            </header>
+            <footer>
             <p>${body}</p>
+            <button class='btn edit-btn' data-id=${id}>Edit</button>
+            <button class='btn delete-btn' data-id=${id}>Delete</button>
           </footer>
           
         </article>
