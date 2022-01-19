@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>view and edit your dairy entry</h1>
+    <div>
+      <form id="edit-form">
+        <div class="form-control">
+          <input type="checkbox" name="bookmarked" id="btn-bookmark" />
+          <label for="bookmarked">Add to book marks</label>
+        </div>
+        <input type="text" name="title" id="new-title" />
+        <textarea name="new-body" id="new-body"></textarea>
+        <button type="submit" id="#submit-edit-btn">Edit</button>
+      </form>
+    </div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="./js/singleEntry.js"></script>
+  </body>
+</html>
