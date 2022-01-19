@@ -44,7 +44,7 @@ updateForm.addEventListener('submit', async (e) => {
     newBody.value = '';
     bookmarkBtn.value = false;
 
-    console.log(entry);
+    window.location.replace('/dashboard.html');
   } catch (error) {
     console.log(error);
   }

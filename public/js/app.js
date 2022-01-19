@@ -38,7 +38,9 @@ const showEntries = async () => {
               } />
               </div>
             <div> 
-              <p>Date: ${createdAt}</p>
+              <p>Date: ${new Intl.DateTimeFormat('en-UK').format(
+                new Date(createdAt)
+              )}</p>
             </div>
             </header>
             <footer>
