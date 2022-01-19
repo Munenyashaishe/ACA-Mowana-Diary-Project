@@ -12,6 +12,7 @@ const notFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');
 const authenticationMiddleware = require('./middleware/authentication');
 
+app.use(express.static('./public'));
 app.use(express.json());
 
 // ROUTES

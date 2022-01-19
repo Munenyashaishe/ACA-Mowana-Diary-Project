@@ -1,10 +1,10 @@
-<!DOCTYPE html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+    <title>Document</title>
   </head>
   <body>
     <header>
@@ -15,31 +15,31 @@
     <main>
       <section>
         <div class="text-wrapper">
-          <h3>Welcome Back</h3>
-          <h2>Login In To Your Diary</h2>
+          <h3>Have burning memories?</h3>
+          <h2>Create Your Diary</h2>
         </div>
         <div>
-          <form id="form">
-            <input type="text" placeholder="email" id="inputEmail" />
+          <form id="formReg">
+            <input type="text" placeholder="name" id="inputName" />
+            <input type="text" placeholder="email" id="inputEmailReg" />
             <input
               type="password"
-              name="password"
+              name=""
+              id="inputPasswordReg"
               placeholder="password"
-              id="inputPassword"
             />
-            <button type="submit" id="btnLogin">Login</button>
+            <button type="submit" id="btnReg">Signup</button>
           </form>
-          <p>No account? <a href="register.html">Click here to register</a></p>
+          <p>Returning member? <a href="index.html">Click here to login</a></p>
         </div>
       </section>
     </main>
-
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
       integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="./js/login.js"></script>
+    <script src="./js/register.js"></script>
   </body>
 </html>
