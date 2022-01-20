@@ -9,6 +9,14 @@ const banner = document.querySelector('.banner');
 const searchInput = document.querySelector('#search');
 const bookmarkFilter = document.querySelector('#bookmarked');
 
+const dateElement = document.querySelector('.date');
+
+//SETTING THE CURRENT DAY ON THE DASHBOARD
+const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+let today  = new Date();
+
+dateElement.innerHTML = today.toLocaleDateString("en-US", options);
+
 const config = {
   headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
 };
@@ -20,7 +28,7 @@ const showEntries = async () => {
       data: { nbHits, entries },
     } = await axios.get('/api/v1/entries', config);
 
-    if (nbHits < 1) {
+    if (nbHits === 0) {
       entriesDOM.innerHTML = `
         <h5>You've made no entries. Go on, add one.</h5>
       `;
@@ -114,7 +122,8 @@ bookmarkFilter.addEventListener('change', (e) => {
 });
 
 // CHECKS TO SEE IF TOKEN IS VALID AND USER EXISTS BEFORE LOADING THEIR ENTRIES
-window.onload = function () {
+window.onload = function () {  
+
   const user = localStorage.getItem('diary_user');
   const token = localStorage.getItem('token');
   if (!user || !token) {
@@ -195,3 +204,5 @@ createNewEntryForm.addEventListener('submit', async (e) => {
     console.log(error);
   }
 });
+
+
