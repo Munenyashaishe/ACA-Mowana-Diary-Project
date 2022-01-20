@@ -10,6 +10,9 @@ const { BadRequestError, UnauthenticatedError } = require('../errors');
 const register = async (req, res) => {
   const user = await User.create({ ...req.body });
   const token = user.createJWT(); // DEFINED AS A MONGOOSE INSTANCE METHOD INSIDE THE USER SCHEMA
+  if(!token) {
+    return res.status(StatusCodes.BAD_REQUEST).json({msg: 'something went wrong'})
+  }
   res.status(StatusCodes.CREATED).json({ user: { name: user.name }, token }); // SENDING BACK THE NAME SHOULD WE NEED IT ON THE FRONT END
 };
 
