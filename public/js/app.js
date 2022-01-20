@@ -52,7 +52,7 @@ const showEntries = async () => {
           <footer>
             <div>
               <label for="favorite">Bookmarked</label>
-              <input type="checkbox" name="favorite" ${
+              <input type="checkbox" disabled name="favorite" ${
                 isFavorite ? 'checked' : ''
               } />
             </div>
@@ -61,6 +61,7 @@ const showEntries = async () => {
         </article>
       `;
       })
+      .reverse()
       .join('');
 
     {

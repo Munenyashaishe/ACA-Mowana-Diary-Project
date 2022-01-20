@@ -11,6 +11,7 @@ const entriesRouter = require('./routes/entryRoutes');
 const notFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');
 const authenticationMiddleware = require('./middleware/authentication');
+const res = require('express/lib/response');
 
 app.use(express.static('./public'));
 app.use(express.json());
@@ -18,6 +19,14 @@ app.use(express.json());
 // ROUTES
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/entries', authenticationMiddleware, entriesRouter);
+
+app.use('*', (req, res) => {
+  res
+    .status(404)
+    .send(
+      '<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #e5dada;"><a href="/">404, no page here, back home</a></div>'
+    );
+});
 
 // MIDDLEWARE
 app.use(notFoundMiddleware);
