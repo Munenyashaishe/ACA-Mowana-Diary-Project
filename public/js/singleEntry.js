@@ -13,6 +13,7 @@ const entryId = new URLSearchParams(window.location.search).get('id');
 
 // GRABS ENTRY FROM LOCAL STORAGE AND POPULATES INPUTS WITH DATA FROM IT
 
+
 const config = {
   headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
 };
@@ -53,7 +54,7 @@ updateForm.addEventListener('submit', async (e) => {
     newBody.value = '';
     bookmarkBtn.value = false;
 
-    console.log(entry);
+    window.location.replace('/dashboard.html');
   } catch (error) {
     console.log(error);
   }

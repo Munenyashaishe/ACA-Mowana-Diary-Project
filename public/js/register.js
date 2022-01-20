@@ -9,6 +9,7 @@ const regBtn = document.querySelector('#btnReg');
 
 regForm.addEventListener('submit', async (e) => {
   e.preventDefault();
+  console.log(e);
 
   try {
     const nameValue = nameReg.value;
@@ -22,6 +23,7 @@ regForm.addEventListener('submit', async (e) => {
     });
 
     const { user, token } = data;
+    console.log(user , token);
 
     if (user) {
       localStorage.setItem('diary_user', user.name);

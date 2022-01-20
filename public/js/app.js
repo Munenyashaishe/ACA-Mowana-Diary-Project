@@ -11,10 +11,13 @@ const config = {
 
 const showEntries = async () => {
 
+
   // GETS DATA FROM BACKEND
 
   'show entries running';
 
+
+  // GETS DATA FROM BACKEND
 
   try {
     const {
@@ -27,7 +30,6 @@ const showEntries = async () => {
       `;
     }
 
-
     // CREATES INDIVIDUAL ENTRIES FROM THE BACKEND DATA
 
 
@@ -36,17 +38,25 @@ const showEntries = async () => {
         const { createdAt, isFavorite, title, _id: id, body } = entry;
 
         return `
-        <article>
+        <article class='entry'>
           <header>
-            <h4>${title}</h4>
-            <p>${createdAt}</p>
-            <p>Bookmarked: ${isFavorite}</p>
-            <button class='delete-btn' data-id=${id}>Delete</button>
-            <button class='edit-btn' data-id=${id}>Edit</button>
-          </header>
-          <footer>
-          
+            <div>
+              <h4>${title}</h4>
+              <label for="favorite">Bookmarked</label>
+              <input type="checkbox" name="favorite" ${
+                isFavorite ? 'checked' : ''
+              } />
+              </div>
+            <div> 
+              <p>Date: ${new Intl.DateTimeFormat('en-UK').format(
+                new Date(createdAt)
+              )}</p>
+            </div>
+            </header>
+            <footer>
             <p>${body}</p>
+            <button class='btn edit-btn' data-id=${id}>Edit</button>
+            <button class='btn delete-btn' data-id=${id}>Delete</button>
           </footer>
           
         </article>
@@ -57,8 +67,6 @@ const showEntries = async () => {
   } catch (error) {
 
     // IF FETCH WAS UNSUCCESSFUL, SHOW AN ERROR
-
-    console.log(error);
 
     entriesDOM.innerHTML = `
     '<h5>There was an error, please try later....</h5>';
@@ -99,8 +107,6 @@ entriesDOM.addEventListener('click', async (e) => {
   console.log(element);
   if (element.classList.contains('edit-btn')) {
 
-    const id = element.dataset.id; // ATTACHED DURING THE MAPPING (IS THE ID OF THE ENTRY)
-
     console.log('edit btn clciked');
     const id = element.dataset.id;
 
@@ -108,7 +114,6 @@ entriesDOM.addEventListener('click', async (e) => {
       const {
         data: { entry },
       } = await axios.get(`api/v1/entries/${id}`, config);
-
 
       // PLACES THE ENTRY IN LOCAL STORAGE SO THAT WE CAN GRAB IT FROM entry.html
 

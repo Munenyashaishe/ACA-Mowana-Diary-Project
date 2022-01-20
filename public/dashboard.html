@@ -4,25 +4,42 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/dashboard.css" />
+    <link rel="stylesheet" href="./css/global.css" />
+
     <title>Document</title>
   </head>
-  <body>
+  <body class="page">
     <header>
-      <p id="welcome-text">welcome to your diary</p>
-      <button id="btnLogout">Logout</button>
+      <h1 id="welcome-text">welcome to your diary</h1>
+      <button id="btnLogout" class="btn">Logout</button>
     </header>
 
     <section class="create-entry">
+      <div class="text-wrapper">
+        <h2>Let's write about today</h2>
+        <p class="date">19/01/22</p>
+      </div>
       <form id="formCreate">
-        <input type="text" id="title" placeholder="title" />
+        <input
+          type="text"
+          id="title"
+          placeholder="Title"
+          class="create-entry-input"
+        />
         <textarea
           name="make-entry"
           id="body"
           placeholder="Write about your day"
         ></textarea>
-        <button type="submit">Post</button>
+        <button type="submit" class="btn submit-btn">Post</button>
       </form>
     </section>
+
+    <div class="text-wrapper">
+      <h2>Here are your entries.</h2>
+      <h3>Click on one to relive those memories, or make edits.</h3>
+    </div>
 
     <section class="entries"></section>
     <script

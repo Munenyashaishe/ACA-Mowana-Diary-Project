@@ -4,7 +4,18 @@ const password = document.querySelector('#inputPassword');
 const loginBtn = document.querySelector('#btnLogin');
 
 
+
 // FACILITATES LOGGING A USER IN
+
+
+window.onload = function () {
+  const user = localStorage.getItem('diary_user');
+  const token = localStorage.getItem('token');
+  if (user || token) {
+    // alert('forbidden');
+    window.location.replace('/dashboard.html');
+  }
+};
 
 loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -30,8 +41,6 @@ loginForm.addEventListener('submit', async (e) => {
     } else {
 
       alert('Credentials must be wrong'); // TODO: GOING TO CHANGE THIS TO SOMETHING MORE REASONABLE
-=======
-      alert('Credentials must be wrong');
 
     }
   } catch (error) {
