@@ -3,6 +3,7 @@ const newBody = document.querySelector('#new-body');
 const bookmarkBtn = document.querySelector('#btn-bookmark');
 const updateBtn = document.querySelector('#submit-edit-btn');
 const updateForm = document.querySelector('#edit-form');
+
 // THE TOKEN IN LOCAL STORAGE USED TO BUILD THE AUTH HEADER TO ALLOW US TO SEND REQUESTS
 const config = {
   headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
@@ -11,6 +12,14 @@ const config = {
 const entryId = new URLSearchParams(window.location.search).get('id');
 
 // GRABS ENTRY FROM LOCAL STORAGE AND POPULATES INPUTS WITH DATA FROM IT
+
+
+const config = {
+  headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+};
+const entryId = new URLSearchParams(window.location.search).get('id');
+
+
 window.onload = function () {
   const task = JSON.parse(localStorage.getItem('entry_to_edit'));
   newTitle.value = task.title;
@@ -19,6 +28,7 @@ window.onload = function () {
 };
 
 // ON SUBMIT, EDITS THE CURRENT ENTRY
+
 updateForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   console.log(e);
@@ -50,8 +60,10 @@ updateForm.addEventListener('submit', async (e) => {
   }
 });
 
+
 // ! INITIALLY WANTED TO MAKE A CALL TO THE BACKED TO GRAB THE INDIVIDUAL DATA BEFORE DECIDING AGAINST IT.
 // ! WILL DELETE DURING REFACTOR
+
 // const getTask = async () => {
 //   try {
 //     const { data } = await axios.get(`/api/v1/entries/${entryId}`, config);

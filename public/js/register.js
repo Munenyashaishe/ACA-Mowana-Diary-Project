@@ -4,7 +4,9 @@ const emailReg = document.querySelector('#inputEmailReg');
 const passwordReg = document.querySelector('#inputPasswordReg');
 const regBtn = document.querySelector('#btnReg');
 
+
 // REGISTERS A NEW USER AND SUBMITS THEM TO THE BACKEND, REROUTES TO DASHBOARD ON SUCCESS
+
 regForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   console.log(e);
