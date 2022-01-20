@@ -36,6 +36,12 @@ const getEntry = async (req, res) => {
 const createEntry = async (req, res) => {
   req.body.createdBy = req.user.userId; // ASSIGNS THE POST TO THE USER WHO CREATED IT.
 
+  if (!req.body.title || !req.body.body) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ msg: 'Please provide all values' });
+  }
+
   const entry = await Entry.create(req.body);
   res.status(StatusCodes.CREATED).json({ entry });
 };

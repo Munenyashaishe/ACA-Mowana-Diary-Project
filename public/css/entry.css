@@ -1,5 +1,5 @@
 body {
-  background-color: #e5dada;
+  background-color: var(--clr-main-bcg);
 }
 
 .container {
