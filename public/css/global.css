@@ -10,13 +10,17 @@
 
 :root {
   /* #ea5c1f */
-  --clr-primary: hsl(18, 83%, 52%);
+  --clr-primary: #8e44ad;
   /* #2d3142 */
   --clr-secondary: hsl(229, 19%, 22%);
+  --clr-input-success: #2ecc71;
+  --clr-input-error: #d72638;
+  --clr-edit: #2ec0f9;
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
   --transition: all 0.3s linear;
+  --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
 
 body {

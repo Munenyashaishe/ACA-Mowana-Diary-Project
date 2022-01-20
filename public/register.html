@@ -15,13 +15,13 @@
     <title>Dear Diary</title>
   </head>
 
-  <body class="color-change-4x">
+  <body class="color-change-4x flex">
     <div class="container">
       <header class="header text-center">
         <h2>Dear Diary</h2>
         <p>Have burning memories? Create your diary now!</p>
       </header>
-      <form class="form" id="form">
+      <form class="form" id="formReg">
         <div class="form-control">
           <input type="text" placeholder="Name" id="inputName" />
           <i class="fas fa-check-circle"></i>
@@ -29,19 +29,19 @@
           <small>Error</small>
         </div>
         <div class="form-control">
-          <input type="email" placeholder="Email" id="inputEmail" />
+          <input type="email" placeholder="Email" id="inputEmailReg" />
           <i class="fas fa-check-circle"></i>
           <i class="fas fa-exclamation-circle"></i>
           <small>Error</small>
         </div>
         <div class="form-control">
-          <input type="password" placeholder="Password" id="inputPassword" />
+          <input type="password" placeholder="Password" id="inputPasswordReg" />
           <i class="fas fa-check-circle"></i>
           <i class="fas fa-exclamation-circle"></i>
           <small>Error</small>
         </div>
 
-        <button>Submit</button>
+        <button type="submit" id="btnReg">Submit</button>
         <p>Returning member? <a href="index.html">Click here to log in</a></p>
       </form>
     </div>
@@ -51,6 +51,6 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="./js/login.js"></script>
+    <script src="./js/register.js"></script>
   </body>
 </html>
