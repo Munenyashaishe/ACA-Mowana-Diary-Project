@@ -24,15 +24,13 @@ const checkInputs = () => {
 
   if (emailValue === '') {
     triggerError(email, 'Email cannot be empty');
-  }
-  {
+  } else {
     triggerSuccess(email);
   }
 
   if (passwordValue === '') {
     triggerError(password, 'Password cannot be empty');
-  }
-  {
+  } else {
     triggerSuccess(password);
   }
 };
