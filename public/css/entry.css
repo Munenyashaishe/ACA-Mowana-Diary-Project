@@ -1,34 +1,120 @@
-#btn-return-dash {
-  margin-right: 1rem;
+body {
+  background-color: #e5dada;
 }
 
-#edit-form {
+.container {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
   width: 400px;
+  max-width: 100%;
 }
 
-.form-control {
-  width: 100%;
+#btn-return-dash {
+  position: fixed;
+  top: 10px;
+  left: 10px;
 }
 
-#new-title {
-  width: 100%;
-  border-top: none;
-  border-right: none;
-  border-left: none;
-  border-radius: 0;
-  margin: 1rem 0;
-  font-size: 1.4rem;
+.success-banner {
+  background-color: red;
+  padding: 0.5rem 0;
+  border-radius: var(--radius-sm);
+
+  color: white;
+  visibility: hidden;
 }
 
-#new-body {
-  width: 100%;
-  padding: 1rem;
-  font-size: 1.2rem;
+.success-banner.delete {
+  background-color: var(--clr-input-error);
+  visibility: visible;
   margin-bottom: 1rem;
 }
 
-.btn.edit-btn {
+.success-banner.edit {
+  background-color: var(--clr-edit);
+  visibility: visible;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  margin-bottom: 3rem;
+}
+
+.form {
+  padding: 30px 2.5rem;
+}
+
+.form-control {
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.form-control input,
+.form-control textarea {
+  border: 2px solid #f0f0f0;
+  border-radius: 4px;
+  display: block;
+  font-family: inherit;
+  font-size: 17px;
+  padding: 10px;
   width: 100%;
-  height: 50px;
-  background-color: #0275d8;
+}
+
+.btn-bookmark {
+  display: inline;
+  width: auto;
+}
+
+.form-control.success input,
+.form-control.success textarea {
+  border-color: var(--clr-input-success);
+}
+
+.form-control.error input,
+.form-control.error textarea {
+  border-color: var(--clr-input-error);
+}
+
+.form-control input:focus,
+.form-control textarea:focus {
+  outline: 0;
+  border-color: #777;
+}
+
+.form-control small {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  visibility: hidden;
+}
+
+.form-control.error small {
+  color: var(--clr-input-error);
+  visibility: visible;
+}
+
+.form button {
+  background-color: var(--clr-primary);
+  border: 2px solid var(--clr-primary);
+  border-radius: 4px;
+  color: #fff;
+  display: block;
+  font-family: inherit;
+  font-size: 16px;
+  padding: 10px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.form p {
+  font-size: 0.9rem;
+  margin-top: 0.4rem;
+  text-align: center;
 }

@@ -48,6 +48,11 @@ const editEntry = async (req, res) => {
     params: { id: entryId },
   } = req;
 
+  if (!req.body.title || !req.body.body) {
+    res.status(StatusCodes.BAD_REQUEST).json({ msg: 'Please provide values' });
+    return;
+  }
+
   const entry = await Entry.findByIdAndUpdate(
     { _id: entryId, createdBy: userId },
     req.body,
