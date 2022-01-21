@@ -70,14 +70,6 @@ const resetInputs = () => {
 };
 
 // GRABS ENTRY FROM LOCAL STORAGE AND POPULATES INPUTS WITH DATA FROM IT
-
-
-const config = {
-  headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-};
-const entryId = new URLSearchParams(window.location.search).get('id');
-
-
 window.onload = function () {
   const entry = JSON.parse(localStorage.getItem('entry_to_edit'));
   newTitle.value = entry.title;
@@ -127,9 +119,7 @@ updateForm.addEventListener('submit', async (e) => {
       window.location.replace('/dashboard.html');
     }
   } catch (error) {}
-
 });
-
 
 // ! INITIALLY WANTED TO MAKE A CALL TO THE BACKED TO GRAB THE INDIVIDUAL DATA BEFORE DECIDING AGAINST IT.
 // ! WILL DELETE DURING REFACTOR
