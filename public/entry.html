@@ -10,26 +10,58 @@
     <title>Document</title>
   </head>
   <body class="page flex-col">
-    <div class="flex">
-      <a href="dashboard.html" class="btn" id="btn-return-dash">Go back</a>
-      <h2>Making corrections? Add new memories, click edit when you're done</h2>
-    </div>
+    <a href="dashboard.html" class="btn" id="btn-return-dash">Go back</a>
+
+    <h2 class="text-center">
+      Making corrections? Adding more to your memory, click edit when you're
+      done
+    </h2>
+
     <div>
-      <form id="edit-form" class="flex-col">
-        <div class="form-control flex">
-          <input type="checkbox" name="bookmarked" id="btn-bookmark" />
-          <label for="bookmarked">Add to book marks</label>
-        </div>
-        <div class="form-control">
-          <input type="text" name="title" id="new-title" />
-        </div>
-        <div class="form-control">
-          <textarea name="new-body" id="new-body"></textarea>
-        </div>
-        <button type="submit" id="#submit-edit-btn" class="btn edit-btn">
-          Edit
-        </button>
-      </form>
+      <div class="container">
+        <form class="form" id="edit-form">
+          <p id="successful-operation" class="success-banner">Success</p>
+          <div class="form-control">
+            <input
+              type="checkbox"
+              name="bookmarked"
+              id="btn-bookmark"
+              style="width: fit-content; display: inline"
+            />
+            <label>Add to Bookmarks</label>
+          </div>
+          <div class="form-control">
+            <input type="text" name="title" id="new-title" />
+            <small>Error</small>
+          </div>
+          <div class="form-control">
+            <textarea name="new-body" id="new-body"></textarea>
+            <small>Error</small>
+          </div>
+          <button
+            style="
+              background-color: var(--clr-edit);
+              border: 2px solid var(--clr-edit);
+            "
+            type="submit"
+            id="#submit-edit-btn"
+            class="btn edit-btn"
+          >
+            Confirm Edit
+          </button>
+          <button
+            style="
+              background-color: var(--clr-input-error);
+              border: 2px solid var(--clr-input-error);
+            "
+            type="submit"
+            id="#submit-delete-btn"
+            class="delete-btn"
+          >
+            Delete
+          </button>
+        </form>
+      </div>
     </div>
 
     <script

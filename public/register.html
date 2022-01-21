@@ -4,39 +4,35 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/register.css" />
+    <link rel="stylesheet" href="./css/index.css" />
     <link rel="stylesheet" href="./css/global.css" />
-
-    <title>Document</title>
+    <title>Dear Diary</title>
   </head>
-  <body class="page flex-col color-change-4x">
-    <header>
-      <nav>
-        <div class="logo"><h1>Dear Diary</h1></div>
-      </nav>
-    </header>
-    <main>
-      <section class="text-center">
-        <div class="text-wrapper">
-          <h3>Have burning memories?</h3>
-          <h2>Create Your Diary</h2>
+
+  <body class="color-change-4x flex">
+    <div class="container">
+      <header class="header text-center">
+        <h2>Dear Diary</h2>
+        <p>Have burning memories? Create your diary now!</p>
+      </header>
+      <form class="form" id="formReg">
+        <div class="form-control">
+          <input type="text" placeholder="Name" id="inputName" />
+          <small>Error</small>
         </div>
-        <div>
-          <form id="formReg" class="flex-col">
-            <input type="text" placeholder="name" id="inputName" />
-            <input type="text" placeholder="email" id="inputEmailReg" />
-            <input
-              type="password"
-              name=""
-              id="inputPasswordReg"
-              placeholder="password"
-            />
-            <button type="submit" id="btnReg">Signup</button>
-          </form>
-          <p>Returning member? <a href="index.html">Click here to login</a></p>
+        <div class="form-control">
+          <input type="email" placeholder="Email" id="inputEmailReg" />
+          <small>Error</small>
         </div>
-      </section>
-    </main>
+        <div class="form-control">
+          <input type="password" placeholder="Password" id="inputPasswordReg" />
+          <small>Error</small>
+        </div>
+
+        <button type="submit" id="btnReg">Submit</button>
+        <p>Returning member? <a href="index.html">Click here to log in</a></p>
+      </form>
+    </div>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
       integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="

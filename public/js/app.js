@@ -4,6 +4,18 @@ const logoutBtn = document.querySelector('#btnLogout');
 const createNewEntryForm = document.querySelector('#formCreate');
 const titleInput = document.querySelector('#title');
 const bodyInput = document.querySelector('#body');
+const banner = document.querySelector('.banner');
+
+const searchInput = document.querySelector('#search');
+const bookmarkFilter = document.querySelector('#bookmarked');
+
+const dateElement = document.querySelector('.date');
+
+//SETTING THE CURRENT DAY ON THE DASHBOARD
+const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+let today  = new Date();
+
+dateElement.innerHTML = today.toLocaleDateString("en-US", options);
 
 const config = {
   headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
@@ -24,7 +36,7 @@ const showEntries = async () => {
       data: { nbHits, entries },
     } = await axios.get('/api/v1/entries', config);
 
-    if (nbHits < 1) {
+    if (nbHits === 0) {
       entriesDOM.innerHTML = `
         <h5>You've made no entries. Go on, add one.</h5>
       `;
@@ -40,29 +52,40 @@ const showEntries = async () => {
         return `
         <article class='entry'>
           <header>
+            <h3>${title}</h3>
+            <p>Written: ${new Intl.DateTimeFormat('en-UK').format(
+              new Date(createdAt)
+            )}</p>
+          </header>
+          <div class='content'>
+              ${
+                body.length < 120
+                  ? `<p>${body}</p>`
+                  : `<p>${body.substring(
+                      0,
+                      120
+                    )}...<strong>Click edit to view more</strong></p>`
+              }
+          </div>
+          <footer>
             <div>
-              <h4>${title}</h4>
               <label for="favorite">Bookmarked</label>
-              <input type="checkbox" name="favorite" ${
+              <input type="checkbox" disabled name="favorite" ${
                 isFavorite ? 'checked' : ''
               } />
-              </div>
-            <div> 
-              <p>Date: ${new Intl.DateTimeFormat('en-UK').format(
-                new Date(createdAt)
-              )}</p>
             </div>
-            </header>
-            <footer>
-            <p>${body}</p>
             <button class='btn edit-btn' data-id=${id}>Edit</button>
-            <button class='btn delete-btn' data-id=${id}>Delete</button>
-          </footer>
-          
+          </footer>    
         </article>
       `;
       })
+      .reverse()
       .join('');
+
+    {
+      /* <button class='btn delete-btn' data-id=${id}>Delete</button> */
+    }
+
     entriesDOM.innerHTML = allEntries;
   } catch (error) {
 
@@ -74,10 +97,44 @@ const showEntries = async () => {
   }
 };
 
+// FILTER SEARCH
+searchInput.addEventListener('keyup', (e) => {
+  const filterVal = e.target.value.toLocaleLowerCase();
+  const entries = document.querySelectorAll('.entry');
+
+  const entriesArray = Array.apply(null, entries);
+
+  entriesArray.filter((entry, index) => {
+    let title = entries[index].getElementsByTagName('h3')[0];
+    if (title.innerHTML.toLocaleLowerCase().indexOf(filterVal) > -1) {
+      console.log(entries);
+      entries[index].style.display = '';
+    } else {
+      entries[index].style.display = 'none';
+    }
+  });
+});
+
+// FILTER BOOKMARKED
+bookmarkFilter.addEventListener('change', (e) => {
+  const isFilterChecked = e.target.checked;
+  const entries = document.querySelectorAll('.entry');
+
+  const entriesArray = Array.apply(null, entries);
+
+  entriesArray.filter((entry, index) => {
+    let bookmarkToggle = entries[index].getElementsByTagName('input')[0];
+    if (isFilterChecked === bookmarkToggle.checked) {
+      console.log(entries);
+      entries[index].style.display = '';
+    } else {
+      entries[index].style.display = 'none';
+    }
+  });
+});
 
 // CHECKS TO SEE IF TOKEN IS VALID AND USER EXISTS BEFORE LOADING THEIR ENTRIES
-
-window.onload = function () {
+window.onload = function () {  
   const user = localStorage.getItem('diary_user');
   const token = localStorage.getItem('token');
   if (!user || !token) {
@@ -148,7 +205,18 @@ createNewEntryForm.addEventListener('submit', async (e) => {
 
   try {
     e.preventDefault();
-    await axios.post('/api/v1/entries', { title, body }, config);
+    await axios
+      .post('/api/v1/entries', { title, body }, config)
+      .catch(function (error) {
+        if (error.response.status === 400) {
+          banner.classList = 'banner error';
+          banner.textContent = 'Fields cannot be empty';
+
+          setTimeout(() => {
+            banner.classList = 'banner';
+          }, 3000);
+        }
+      });
     titleInput.value = '';
     bodyInput.value = '';
     showEntries();
@@ -156,3 +224,5 @@ createNewEntryForm.addEventListener('submit', async (e) => {
     console.log(error);
   }
 });
+
+

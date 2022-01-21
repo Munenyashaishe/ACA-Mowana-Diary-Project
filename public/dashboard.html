@@ -16,29 +16,58 @@
     </header>
 
     <section class="create-entry">
-      <div class="text-wrapper">
-        <h2>Let's write about today</h2>
-        <p class="date">19/01/22</p>
+      <div>
+        <h2>Let's write about today, shall we?</h2>
+        <p class="date"></p>
       </div>
-      <form id="formCreate">
-        <input
-          type="text"
-          id="title"
-          placeholder="Title"
-          class="create-entry-input"
-        />
-        <textarea
-          name="make-entry"
-          id="body"
-          placeholder="Write about your day"
-        ></textarea>
-        <button type="submit" class="btn submit-btn">Post</button>
-      </form>
+      <div class="container">
+        <form id="formCreate" class="form">
+          <p class="banner">An error occured</p>
+          <input
+            type="text"
+            id="title"
+            placeholder="Title"
+            class="create-entry-input"
+          />
+          <textarea
+            name="make-entry"
+            id="body"
+            placeholder="Write about your day"
+          ></textarea>
+          <button type="submit" class="btn submit-btn">Post</button>
+        </form>
+      </div>
     </section>
 
-    <div class="text-wrapper">
+    <p></p>
+
+    <div>
       <h2>Here are your entries.</h2>
       <h3>Click on one to relive those memories, or make edits.</h3>
+    </div>
+
+    <div class="filters">
+      <div class="form-control">
+        <input type="text" id="search" placeholder="Search by title" />
+      </div>
+
+      <div class="flex">
+        <button
+          onclick="showEntries()"
+          class="btn"
+          style="margin-right: 1rem; height: 100%"
+        >
+          Fetch all
+        </button>
+        <div class="form-control">
+          <label for="bookmarked">View bookmarked</label>
+          <input
+            type="checkbox"
+            id="bookmarked"
+            placeholder="Search by title"
+          />
+        </div>
+      </div>
     </div>
 
     <section class="entries"></section>
