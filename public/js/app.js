@@ -12,23 +12,21 @@ const bookmarkFilter = document.querySelector('#bookmarked');
 const dateElement = document.querySelector('.date');
 
 //SETTING THE CURRENT DAY ON THE DASHBOARD
-const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-let today  = new Date();
+const options = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+};
+let today = new Date();
 
-dateElement.innerHTML = today.toLocaleDateString("en-US", options);
+dateElement.innerHTML = today.toLocaleDateString('en-US', options);
 
 const config = {
   headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
 };
 
 const showEntries = async () => {
-
-
-  // GETS DATA FROM BACKEND
-
-  'show entries running';
-
-
   // GETS DATA FROM BACKEND
 
   try {
@@ -36,14 +34,13 @@ const showEntries = async () => {
       data: { nbHits, entries },
     } = await axios.get('/api/v1/entries', config);
 
-    if (nbHits === 0) {
+    if (!entries) {
       entriesDOM.innerHTML = `
         <h5>You've made no entries. Go on, add one.</h5>
       `;
     }
 
     // CREATES INDIVIDUAL ENTRIES FROM THE BACKEND DATA
-
 
     const allEntries = entries
       .map((entry) => {
@@ -88,7 +85,6 @@ const showEntries = async () => {
 
     entriesDOM.innerHTML = allEntries;
   } catch (error) {
-
     // IF FETCH WAS UNSUCCESSFUL, SHOW AN ERROR
 
     entriesDOM.innerHTML = `
@@ -134,7 +130,7 @@ bookmarkFilter.addEventListener('change', (e) => {
 });
 
 // CHECKS TO SEE IF TOKEN IS VALID AND USER EXISTS BEFORE LOADING THEIR ENTRIES
-window.onload = function () {  
+window.onload = function () {
   const user = localStorage.getItem('diary_user');
   const token = localStorage.getItem('token');
   if (!user || !token) {
@@ -147,7 +143,6 @@ window.onload = function () {
   )}`;
   showEntries();
 };
-
 
 // LOGS USER OUT, REMOVES THEIR TOKEN FROM LOCAL STORAGE AND REROUTES BACK TO index.html
 
@@ -163,7 +158,6 @@ entriesDOM.addEventListener('click', async (e) => {
   const element = e.target;
   console.log(element);
   if (element.classList.contains('edit-btn')) {
-
     console.log('edit btn clciked');
     const id = element.dataset.id;
 
@@ -224,5 +218,3 @@ createNewEntryForm.addEventListener('submit', async (e) => {
     console.log(error);
   }
 });
-
-
