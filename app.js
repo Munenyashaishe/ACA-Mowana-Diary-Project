@@ -23,13 +23,13 @@ app.use(
     max: 100,
   })
 );
+app.use(express.static('./public'));
 app.use(express.json());
 app.use(helmet());
 app.use(cors());
 app.use(xss());
 
-app.use(express.static('./public'));
-app.use(express.json());
+// app.use(express.json());
 
 // ROUTES
 // app.get('/', (req, res) => {
