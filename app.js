@@ -32,6 +32,10 @@ app.use(express.static('./public'));
 app.use(express.json());
 
 // ROUTES
+// app.get('/', (req, res) => {
+//   res.send('Dear Diary API');
+// });
+
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/entries', authenticationMiddleware, entriesRouter);
 

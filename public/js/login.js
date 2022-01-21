@@ -44,6 +44,17 @@ window.onload = function () {
 };
 
 // FACILITATES LOGGING A USER IN
+
+
+window.onload = function () {
+  const user = localStorage.getItem('diary_user');
+  const token = localStorage.getItem('token');
+  if (user || token) {
+    // alert('forbidden');
+    window.location.replace('/dashboard.html');
+  }
+};
+
 loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -74,12 +85,14 @@ loginForm.addEventListener('submit', async (e) => {
     const { user, token } = request.data;
     console.log(user, token);
 
+
     if (request.status === 200) {
       triggerSuccess(email);
       triggerSuccess(password);
     }
 
     // PLACES USER AND THEIR TOKEN IN LOCAL STORAGE
+
     if (user) {
       localStorage.setItem('diary_user', user.name);
       localStorage.setItem('token', token);

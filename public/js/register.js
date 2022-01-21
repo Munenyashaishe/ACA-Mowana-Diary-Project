@@ -43,9 +43,12 @@ const checkInputs = () => {
   }
 };
 
+
 // REGISTERS A NEW USER AND SUBMITS THEM TO THE BACKEND, REROUTES TO DASHBOARD ON SUCCESS
+
 regForm.addEventListener('submit', async (e) => {
   e.preventDefault();
+  console.log(e);
 
   checkInputs();
 
@@ -68,6 +71,7 @@ regForm.addEventListener('submit', async (e) => {
     console.log(request);
 
     const { user, token } = request.data;
+
 
     if (user) {
       localStorage.setItem('diary_user', user.name);
